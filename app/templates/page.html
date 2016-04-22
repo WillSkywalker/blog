@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{{ moment.include_moment() }}
+{% block title %}
+    {{ article.title }}
+{% endblock %}
+{% block header %}
+    <span class="icon fa-laptop"></span>
+    <h2>{{ article.title }}</h2>
+    <p>{{ article.subtitle }}</p>
+{% endblock %}
+{% block sidebar %}
+<section>
+    <a href="#" class="image featured"><img src="{{ article.image_url }}" alt="" /></a>
+</section>
+<section>
+    <header><h3>Tags</h3></header>
+    <p>{% for tag in tags %}<a href="{{ url_for('main.tags', name=tag) }}">{{ tag }}</a> {% endfor %}</p>
+    <header>
+        <h3>Tags</h3>
+    </header>
+    <p>{% for tag in tags %}<a href="{{ url_for('main.tags', name=tag) }}">{{ tag }}</a> {% endfor %}</p>
+
+</section>
+{% endblock %}
+{% block content %}
+    <section>
+        {{ article.content }}
+    </section>
+{% endblock %}

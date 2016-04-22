@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<!--
+    Twenty by HTML5 UP
+    html5up.net | @n33co
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+    <head>
+        <title>{% block title %}{% endblock %} - Will Skywalker's Ranch</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!--[if lte IE 8]><script src="{{ url_for('static', filename='js/ie/html5shiv.js') }}"></script><![endif]-->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+        <!--[if lte IE 8]><link rel="stylesheet" href="{{ url_for('static', filename='css/ie8.css') }}" /><![endif]-->
+        <!--[if lte IE 9]><link rel="stylesheet" href="{{ url_for('static', filename='css/ie9.css') }}" /><![endif]-->
+    </head>
+    <body class="no-sidebar">
+        <div id="page-wrapper">
+
+            <!-- Header -->
+                <header id="header">
+                    <h1 id="logo"><a href="http://willskywalker.com">Will Skywalker's <span>Blog</span></a></h1>
+                    <nav id="nav">
+                        <ul>
+                            <li class="current"><a href="/">Home</a></li>
+                            <li class="submenu">
+                                <a href="#">Navigations</a>
+                                <ul>
+                                    <li><a href="left-sidebar.html">Articles</a></li>
+                                    <li><a href="right-sidebar.html">Tags</a></li>
+                                    <li><a href="no-sidebar.html">Messages</a></li>
+                                    <li><a href="contact.html">About me</a></li>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </header>
+
+
+            <!-- Main -->
+                <article id="main">
+
+                    <header class="special container">
+                    {% block header %}
+                        <span class="icon fa-clock-o"></span>
+                        <h2>We haven't reach there <strong>yet</strong>...</h2>
+                        <p>Stay tuned!</p>
+                    {% endblock %}
+                    </header>
+
+                    <!-- One -->
+                    {% block main %}                        
+                        <section class="wrapper style4 container">
+
+                        <!-- Content -->
+                            <div class="content">
+                                {% block content %}
+                                {% endblock %}
+                            </div>
+                        </section>
+                    {% endblock %}
+
+
+                </article>
+
+            <!-- Footer -->
+                <footer id="footer">
+
+                    <ul class="icons">
+                        <!-- <li><a href="#" class="icon circle fa-twitter"><span class="label">Twitter</span></a></li> -->
+                        <li><a href="https://www.facebook.com/cxbats" class="icon circle fa-facebook"><span class="label">Facebook</span></a></li>
+                        <li><a href="https://plus.google.com/109979013465811173411" class="icon circle fa-google-plus"><span class="label">Google+</span></a></li>
+                        <li><a href="https://github.com/WillSkywalker" class="icon circle fa-github"><span class="label">Github</span></a></li>
+                        <!-- <li><a href="#" class="icon circle fa-dribbble"><span class="label">Dribbble</span></a></li> -->
+                    </ul>
+
+                    <ul class="copyright">
+                        <li>&copy; Will Skywalker</li>
+                        <li>The content is available under <a href="http://www.wtfpl.net/">WTFPL v2</a> license.</li>
+                        <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+                    </ul>
+
+                </footer>
+
+        </div>
+
+        <!-- Scripts -->
+            <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+            <script src="{{ url_for('static', filename='js/jquery.dropotron.min.js') }}"></script>
+            <script src="{{ url_for('static', filename='js/jquery.scrolly.min.js') }}"></script>
+            <script src="{{ url_for('static', filename='js/jquery.scrollgress.min.js') }}"></script>
+            <script src="{{ url_for('static', filename='js/skel.min.js') }}"></script>
+            <script src="{{ url_for('static', filename='js/util.js') }}"></script>
+            <!--[if lte IE 8]><script src="{{ url_for('static', filename='js/ie/respond.min.js') }}"></script><![endif]-->
+            <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    </body>
+</html>
