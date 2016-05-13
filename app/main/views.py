@@ -51,4 +51,3 @@ def tags(name=None):
     taglist.sort(key=lambda x: x.articles.count(), reverse=True)
     return render_template('tags-list.html', tags=taglist)
 
-
