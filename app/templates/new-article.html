@@ -10,6 +10,7 @@
         <form class="column 50%" method="POST">
             {{ form.hidden_tag() }}
             {{ form.title.label }}{{ form.title() }}
+            {{ form.formatted_title.label }}{{ form.formatted_title() }}
             {{ form.subtitle.label }}{{ form.subtitle() }}
             {{ form.tags.label }}{{ form.tags() }}
             {{ form.content.label }}{{ form.content() }}
@@ -18,4 +19,7 @@
             {{ form.submit() }}
         </form>
     </section>
+{% endblock %}
+{% block scripts %}
+{{ pagedown.include_pagedown() }}
 {% endblock %}

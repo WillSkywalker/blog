@@ -16,7 +16,11 @@ class Config:
 
 
 class TestConfig(Config):
+    SECRET_KEY = 'Te apuntaste al DELE de mayo'
+    BLOG_ADMIN = 'test'
+    BLOG_PASSWD = '1234'
     TESTING = True
+    WTF_CSRF_ENABLED = False
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 
                                                           'test_data.sqlite')
 
@@ -24,5 +28,5 @@ class TestConfig(Config):
 
 config = {
     'default': Config,
-    'test': TestConfig,
+    'testing': TestConfig,
 }

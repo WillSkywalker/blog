@@ -1,9 +1,12 @@
 from datetime import datetime
 from flask import render_template, session, redirect, url_for
+from num2words import num2words
+from sqlalchemy import desc
+
 
 from . import main
 from .. import db
-from ..models import Article
+from ..models import Article, Tag
 
 @main.route('/')
 def index():
@@ -26,18 +29,26 @@ def article_page(num):
         return render_template('not-yet.html')
 
 
+@main.route('/list')
 @main.route('/list/<int:page>')
-def list_page(page):
-    articles_list = Article.query.order_by(-Article.id).limit(8).all()
-    if article:
-        return render_template('page.html', title=article.title, subtitle=article.subtitle,
-                               content=article.content, tags=article.tags)
+def list_page(page=1):
+    pagination = Article.query.order_by(-Article.id).paginate(page, per_page=10, error_out=False)
+    numname = num2words(pagination.page)
+    if pagination.items:
+        return render_template('list.html', pagination=pagination, numname=numname)
     else:
         return render_template('not-yet.html')
 
 
+@main.route('/tag')
 @main.route('/tag/<name>')
-def tags(name):
-    return render_template('not-yet.html')
+def tags(name=None):
+    if name:
+        tag = Tag.query.filter_by(tagname=name).first()
+        if tag:
+            return render_template('tags.html', tag=tag)
+    taglist = Tag.query.all()
+    taglist.sort(key=lambda x: x.articles.count(), reverse=True)
+    return render_template('tags-list.html', tags=taglist)
 
 

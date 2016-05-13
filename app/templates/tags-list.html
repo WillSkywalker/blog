@@ -6,7 +6,7 @@
 -->
 <html lang="en">
 	<head>
-		<title>Will Skywalker's Ranch</title>
+		<title>Tags - Will Skywalker's Ranch</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
@@ -39,7 +39,7 @@
 				</header>
 
 			<!-- Banner -->
-				<section id="banner">
+				<section id="banner" style="background-image:url({{url_for('static', filename='images/light-bl.svg')}}), url({{url_for('static', filename='images/light-br.svg')}}), url({{url_for('static', filename='images/overlay.png')}}), url({{url_for('static', filename='images/tag_banner.jpg')}})">
 
 					<!--
 						".inner" is set up as an inline-block so it automatically expands
@@ -50,13 +50,9 @@
 					<div class="inner">
 
 						<header>
-							<h2>SKYWALKER RANCH</h2>
+							<h2>Tags</h2>
 						</header>
-						<p>This is <strong>Skywalker's Ranch</strong>, an individual blog <br/>written and maintained
-						<!-- <br />
-						responsive template
-						<br /> -->
-						by <a href="http://willskywalker.com">Will Skywalker</a>.</p>
+						<p>Find out what's <br/><strong>trending</strong> on my blog!</p>
 						<footer>
 							<ul class="buttons vertical">
 								<li><a href="#main" class="button fit scrolly">Find Out More</a></li>
@@ -70,50 +66,34 @@
 			<!-- Main -->
 				<article id="main">
 
-					<header class="special container">
-						<span class="icon fa-bar-chart-o"></span>
-						<h2>As this is my <strong>twentieth</strong> freebie for HTML5 UP
-						<br />
-						I decided to give it a really creative name.</h2>
-						<p>Turns out <strong>Twenty</strong> was the best I could come up with. Anyway, lame name aside,
-						<br />
-						it's minimally designed, fully responsive, built on HTML5/CSS3/<strong>skel</strong>,
-						and, like all my stuff,
-						<br />
-						released for free under the <a href="http://html5up.net/license">Creative Commons Attribution 3.0</a> license. Have fun!</p>
-					</header>
-
 					<!-- Three -->
 						<section class="wrapper style3 container special">
 
 							<header class="major">
-								<h2><strong>Recent</strong> articles</h2>
+								<h2><strong>Popular</strong> tags</h2>
 							</header>
-							{% for two_articles in articles %}
 							<div class="row">
-								{% for article in two_articles %}
-								{% if article %}
-								<div class="6u 12u(narrower)">
+							{% for tag in tags %}
+								<div class="4u 12u(narrower)">
 
 									<section>
-										<a href="{{ url_for('main.article_page', num=article.id) }}" class="image featured" style="padding-bottom:50%;height:0;overflow: hidden;"><img src="{{ article.image_url }}" alt="" /></a>
 										<header>
-											<h3>{{article.title}}</h3>
-											{# {{ moment(article.timestamp).format('LLL') }}<br>
-											{{ moment(now).format('LLL') }} #}
-											<footer class="icon fa-clock-o" style="font-size:85%;"> &nbsp;{{moment(article.timestamp).fromNow(refresh=True)}}</footer>
+											<h3>{{ tag.tagname }}</h3>
 										</header>
-										<p>{{article.content | striptags | truncate(130)}}</p>
+										<p lingdex="6">{{ tag.articles.count() }}</p>
+										<footer>
+											<ul class="buttons">
+												<li><a href="#" class="button small">Learn More</a></li>
+											</ul>
+										</footer>
 									</section>
 								</div>
-								{% endif %}
-								{% endfor %}
-							</div>
 							{% endfor %}
+							</div>
 
 							<footer class="major">
-								<ul class="buttons">
-									<li><a href="{{ url_for('main.list_page', page=1) }}" class="button">See More</a></li>
+								<ul class="buttons" id="seemore">
+									<li><a href="javascript:void();" class="button">See More</a></li>
 								</ul>
 							</footer>
 
@@ -122,7 +102,7 @@
 				</article>
 
 			<!-- CTA -->
-				<section id="cta">
+				<section id="cta" style="background-image:url({{url_for('static', filename='images/light-bl.svg')}}), url({{url_for('static', filename='images/light-br.svg')}}), url({{url_for('static', filename='images/overlay.png')}}), url({{url_for('static', filename='images/tag_banner.jpg')}})">
 
 					<header>
 						<h2>Get in <strong>touch</strong></h2>
@@ -169,6 +149,23 @@
 			<!--[if lte IE 8]><script src="{{ url_for('static', filename='js/ie/respond.min.js') }}"></script><![endif]-->
 			<script src="{{ url_for('static', filename='js/main.js') }}"></script>
 			{{ moment.include_moment() }}
+			<script type='text/javascript'>
+			$(function() {
+			  var a = 0;
+			  var b = 8;
+			  $('#seemore').bind('click', function() {
+			  	a += 8; b += 8;
+				$.getJSON('/_add_numbers', {
+				  a: $('input[name="a"]').val(),
+				  b: $('input[name="b"]').val()
+				}, function(data) {
+				  $("#result").text(data.result);
+				});
+				console.log(a);
+				return false;
+			  });
+			});
+			</script>
 
 	</body>
 </html>

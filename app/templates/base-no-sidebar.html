@@ -9,6 +9,8 @@
         <title>{% block title %}{% endblock %} - Will Skywalker's Ranch</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
+        {% block metas %}{% endblock %}
         <!--[if lte IE 8]><script src="{{ url_for('static', filename='js/ie/html5shiv.js') }}"></script><![endif]-->
         <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
         <!--[if lte IE 8]><link rel="stylesheet" href="{{ url_for('static', filename='css/ie8.css') }}" /><![endif]-->
@@ -26,8 +28,8 @@
                             <li class="submenu">
                                 <a href="#">Navigations</a>
                                 <ul>
-                                    <li><a href="left-sidebar.html">Articles</a></li>
-                                    <li><a href="right-sidebar.html">Tags</a></li>
+                                    <li><a href="{{ url_for('main.list_page', page=1) }}">Articles</a></li>
+                                    <li><a href="{{ url_for('main.tags') }}">Tags</a></li>
                                     <li><a href="no-sidebar.html">Messages</a></li>
                                     <li><a href="contact.html">About me</a></li>
                                     </li>
@@ -94,6 +96,8 @@
             <script src="{{ url_for('static', filename='js/util.js') }}"></script>
             <!--[if lte IE 8]><script src="{{ url_for('static', filename='js/ie/respond.min.js') }}"></script><![endif]-->
             <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+            {% block scripts %}
+            {% endblock %}
 
     </body>
 </html>

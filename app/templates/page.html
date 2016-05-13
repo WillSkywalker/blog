@@ -1,29 +1,55 @@
 {% extends 'base.html' %}
-{{ moment.include_moment() }}
 {% block title %}
     {{ article.title }}
 {% endblock %}
+{% block metas %}
+<meta property="og:url" content="{{ url_for('main.article_page', num=article.id) }}" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="{{ article.title }}" />
+<meta property="og:description" content="{{ article.content[0:90] }}" />
+<meta property="og:image" content="{{ article.image_url }}" />
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5720e3a86afd42ae"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.3.0/styles/default.min.css">
+<script src="//cdn.jsdelivr.net/highlight.js/9.3.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style type="text/css">
+code {
+    font-family: monospace !important;
+}
+section {
+    list-style-type: initial !important;
+    padding: 20px !important;
+}
+</style>
+{% endblock %}
 {% block header %}
     <span class="icon fa-laptop"></span>
+    {% if article.formatted_title %}
+    <h2>{{ article.formatted_title | safe }}</h2>
+    {% else %}
     <h2>{{ article.title }}</h2>
+    {% endif %}
     <p>{{ article.subtitle }}</p>
 {% endblock %}
 {% block sidebar %}
 <section>
-    <a href="#" class="image featured"><img src="{{ article.image_url }}" alt="" /></a>
+    <a href="{{ article.image_url }}" class="image featured"><img src="{{ article.image_url }}" alt="" /></a>
 </section>
 <section>
+    <header><h3>Time</h3></header>
+    <p>{{ moment(article.timestamp).format('LLL') }}</p>
+    <header><h3><a href="#comment">Comments</a></h3></header>
+    <p>//TODO</p>
     <header><h3>Tags</h3></header>
-    <p>{% for tag in tags %}<a href="{{ url_for('main.tags', name=tag) }}">{{ tag }}</a> {% endfor %}</p>
-    <header>
-        <h3>Tags</h3>
-    </header>
-    <p>{% for tag in tags %}<a href="{{ url_for('main.tags', name=tag) }}">{{ tag }}</a> {% endfor %}</p>
-
-</section>
+    <p>{% for tag in article.tags %}
+        {% if loop.last %}<a href="{{ url_for('main.tags', name=tag.tagname) }}">{{ tag.tagname }}</a>
+        {% else %}<a href="{{ url_for('main.tags', name=tag.tagname) }}">{{ tag.tagname }}</a>, {% endif %}
+        {% endfor %}</p>
+    <header><h3>Share to</h3></header>
+    <div class="addthis_sharing_toolbox"></div>
 {% endblock %}
 {% block content %}
     <section>
-        {{ article.content }}
+        {{ article.content | safe }}
     </section>
 {% endblock %}
