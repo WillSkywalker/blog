@@ -22,5 +22,6 @@ class TestMain(unittest.TestCase):
     def test_homepage(self):
         response = self.client.get(url_for('main.index'))
         self.assertTrue('I still love you, Ahoo' in response.get_data(as_text=True))
+        assert 1 == 2
 
         
