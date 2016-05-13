@@ -122,7 +122,6 @@
 <p id="n51" class="stm mis"><a href="#n51">51</a></p>
 <p id="n52" class="stm mis"><a href="#n52">52</a></p>
 <p id="n53" class="pln"><a href="#n53">53</a></p>
-<p id="n54" class="pln"><a href="#n54">54</a></p>
                 
             </td>
             <td class="text">
@@ -176,10 +175,9 @@
 <p id="t48" class="stm mis">&nbsp; &nbsp; &nbsp; &nbsp; <span class="key">if</span> <span class="nam">tag</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
 <p id="t49" class="stm mis">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="key">return</span> <span class="nam">render_template</span><span class="op">(</span><span class="str">&#39;tags.html&#39;</span><span class="op">,</span> <span class="nam">tag</span><span class="op">=</span><span class="nam">tag</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 <p id="t50" class="stm mis">&nbsp; &nbsp; <span class="nam">taglist</span> <span class="op">=</span> <span class="nam">Tag</span><span class="op">.</span><span class="nam">query</span><span class="op">.</span><span class="nam">all</span><span class="op">(</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
-<p id="t51" class="stm mis">&nbsp; &nbsp; <span class="nam">taglist</span><span class="op">.</span><span class="nam">sort</span><span class="op">(</span><span class="nam">key</span><span class="op">=</span><span class="key">lambda</span> <span class="nam">x</span><span class="op">:</span> <span class="nam">x</span><span class="op">.</span><span class="nam">articles</span><span class="op">.</span><span class="nam">count</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t51" class="stm mis">&nbsp; &nbsp; <span class="nam">taglist</span><span class="op">.</span><span class="nam">sort</span><span class="op">(</span><span class="nam">key</span><span class="op">=</span><span class="key">lambda</span> <span class="nam">x</span><span class="op">:</span> <span class="nam">x</span><span class="op">.</span><span class="nam">articles</span><span class="op">.</span><span class="nam">count</span><span class="op">(</span><span class="op">)</span><span class="op">,</span> <span class="nam">reverse</span><span class="op">=</span><span class="key">True</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 <p id="t52" class="stm mis">&nbsp; &nbsp; <span class="key">return</span> <span class="nam">render_template</span><span class="op">(</span><span class="str">&#39;tags-list.html&#39;</span><span class="op">,</span> <span class="nam">tags</span><span class="op">=</span><span class="nam">taglist</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 <p id="t53" class="pln"><span class="strut">&nbsp;</span></p>
-<p id="t54" class="pln"><span class="strut">&nbsp;</span></p>
                 
             </td>
         </tr>
@@ -190,7 +188,7 @@
     <div class="content">
         <p>
             <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.org">coverage.py v4.0.3</a>,
-            created at 2016-05-11 20:28
+            created at 2016-05-13 08:58
         </p>
     </div>
 </div>
