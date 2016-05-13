@@ -1,0 +1,25 @@
+{% extends 'base-no-sidebar.html' %}
+{% block title %}Post new article - Will Skywalker's Ranch{% endblock %}
+{% block header %}
+    <span class="icon fa-inbox"></span>
+    <h2>Post new article</h2>
+    <p>Bernie says: "Think before you write."</p>
+{% endblock %}
+{% block content %}
+    <section>
+        <form class="column 50%" method="POST">
+            {{ form.hidden_tag() }}
+            {{ form.title.label }}{{ form.title() }}
+            {{ form.formatted_title.label }}{{ form.formatted_title() }}
+            {{ form.subtitle.label }}{{ form.subtitle() }}
+            {{ form.tags.label }}{{ form.tags() }}
+            {{ form.content.label }}{{ form.content() }}
+            {{ form.image_url.label }}{{ form.image_url() }}
+            <br>
+            {{ form.submit() }}
+        </form>
+    </section>
+{% endblock %}
+{% block scripts %}
+{{ pagedown.include_pagedown() }}
+{% endblock %}
