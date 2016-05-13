@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import os
+import sys
 COV = None
 if os.environ.get('FLASK_COVERAGE'):
     import coverage
@@ -26,12 +27,11 @@ manager.add_command('db', MigrateCommand)
 def test(coverage=False):
     """Run the unit tests."""
     if coverage and not os.environ.get('FLASK_COVERAGE'):
-        import sys
         os.environ['FLASK_COVERAGE'] = '1'
         os.execvp(sys.executable, [sys.executable] + sys.argv)
     import unittest
     tests = unittest.TestLoader().discover('tests')
-    unittest.TextTestRunner(verbosity=2).run(tests)
+    ret = unittest.TextTestRunner(verbosity=2).run(tests).wasSuccessful()
     if COV:
         COV.stop()
         COV.save()
@@ -42,6 +42,7 @@ def test(coverage=False):
         COV.html_report(directory=covdir)
         print('HTML version: file://%s/index.html' % covdir)
         COV.erase()
+    sys.exit(ret)
 
 
 
