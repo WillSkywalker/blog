@@ -7,7 +7,7 @@ python:
   - "nightly"
 
 install: 
-  - pip install -r requirements.txt
+  - source venv/bin/activate
 
 script: 
   - python manage.py test --coverage
