@@ -32,7 +32,7 @@ class TestAdmin(unittest.TestCase):
             'name': 'alice',
             'password': 'wonderland'
             }, follow_redirects=True)
-        self.assertTrue('Under construction' in response.get_data(as_text=True))
+        self.assertIn('Under construction', response.get_data(as_text=True))
 
 
     def test_new_article(self):
@@ -40,10 +40,18 @@ class TestAdmin(unittest.TestCase):
             'name': 'test',
             'password': '1234'
             })
-        self.client.post(url_for('admin.new_article'), data={
-            'name': 'test',
-            'password': '1234'
+        response = self.client.post(url_for('admin.new_article'), data={
+            'title': 'A Day To Celebrate',
+            'subtitle': 'Holiday Special!',
+            'tags': 'The Lion, the Witch, the Wardrobe',
+            'content': '##This is a test\n\nyes it is',
+            'image_url': 'https://upload.wikimedia.org/wikipedia/en/c/cb/The_Chronicles_of_Narnia_box_set_cover.jpg',
             })
+        self.assertEqual(response.status_code, 302)
+        response = self.client.get(url_for('main.article_page', num=1))
+        self.assertIn('<title>A Day To Celebrate - Will Skywalker\'s Ranch</title>', response.get_data(as_text=True))
+        # self.client.find_element_by_link_text('A Day To Celebrate').click()
+        # self.assertTrue(re.search('<h1>', self.client.page_source))
 
 
 

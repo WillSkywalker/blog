@@ -61,11 +61,15 @@ def manage_article(num):
         article.image_url = f.image_url.data
         if f.formatted_title.data:
             article.formatted_title = f.formatted_title.data
+        for t in article.tags:
+            altag = Tag.query.filter_by(tagname=t).first()
+            altag.articles.remove(article)
         tags = f.tags.data.split(', ')
         for t in tags:
             altag = Tag.query.filter_by(tagname=t).first()
             if altag:
-                altag.articles.remove(article)
+                altag.articles.append(post)
+                db.session.add(altag)
             else:
                 db.session.add(Tag(tagname=t, articles=[post]))
         db.session.add(article)

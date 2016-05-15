@@ -1,7 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}
-    {{ article.title }}
-{% endblock %}
+{% block title %}{{ article.title }}{% endblock %}
 {% block metas %}
 <meta property="og:url" content="{{ url_for('main.article_page', num=article.id) }}" />
 <meta property="og:type" content="article" />
