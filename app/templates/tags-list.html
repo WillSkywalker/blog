@@ -149,23 +149,7 @@
 			<!--[if lte IE 8]><script src="{{ url_for('static', filename='js/ie/respond.min.js') }}"></script><![endif]-->
 			<script src="{{ url_for('static', filename='js/main.js') }}"></script>
 			{{ moment.include_moment() }}
-			<script type='text/javascript'>
-			$(function() {
-			  var a = 0;
-			  var b = 8;
-			  $('#seemore').bind('click', function() {
-			  	a += 8; b += 8;
-				$.getJSON('/_add_numbers', {
-				  a: $('input[name="a"]').val(),
-				  b: $('input[name="b"]').val()
-				}, function(data) {
-				  $("#result").text(data.result);
-				});
-				console.log(a);
-				return false;
-			  });
-			});
-			</script>
+
 
 	</body>
 </html>

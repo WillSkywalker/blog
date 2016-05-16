@@ -44,7 +44,7 @@ def new_article():
             else:
                 db.session.add(Tag(tagname=t, articles=[post]))
         db.session.add(post)
-        return redirect(url_for('main.index'))
+        return redirect(url_for('main.article_page', num=post.id))
     return render_template('new-article.html', form=f)
 
 

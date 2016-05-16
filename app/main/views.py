@@ -1,7 +1,6 @@
 from datetime import datetime
 from flask import render_template, session, redirect, url_for
 from num2words import num2words
-from sqlalchemy import desc
 
 
 from . import main
@@ -47,7 +46,7 @@ def tags(name=None):
         tag = Tag.query.filter_by(tagname=name).first()
         if tag:
             return render_template('tags.html', tag=tag)
-    taglist = Tag.query.all()
-    taglist.sort(key=lambda x: x.articles.count(), reverse=True)
+    taglist = filter(lambda x: x.articles.count() > 1, Tag.query.all())
+    taglist = list(sorted(taglist, key=lambda x: x.articles.count(), reverse=True))
     return render_template('tags-list.html', tags=taglist)
 
