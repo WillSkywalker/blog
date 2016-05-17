@@ -1,4 +1,6 @@
 import unittest
+import forgery_py
+
 from flask import url_for
 from app import create_app, db
 from app.models import Article, Comment, Tag

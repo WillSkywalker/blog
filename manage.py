@@ -45,6 +45,15 @@ def test(coverage=False):
     sys.exit(ret)
 
 
+@manager.command
+def freeze():
+    """
+    Freeze the site into static files.
+    This function has severe problem. Do not use!
+    """
+    from flask_frozen import Freezer
+    freezer = Freezer(app)
+    freezer.freeze()
 
 
 if __name__ == '__main__':

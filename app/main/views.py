@@ -3,9 +3,9 @@ from flask import render_template, session, redirect, url_for
 from num2words import num2words
 
 
-from . import main
+from . import main, forms
 from .. import db
-from ..models import Article, Tag
+from ..models import Article, Tag, Comment
 
 @main.route('/')
 def index():
@@ -49,4 +49,19 @@ def tags(name=None):
     taglist = filter(lambda x: x.articles.count() > 1, Tag.query.all())
     taglist = list(sorted(taglist, key=lambda x: x.articles.count(), reverse=True))
     return render_template('tags-list.html', tags=taglist)
+
+
+@main.route('/message', methods=['GET', 'POST'])
+@main.route('/message/<int:page>', methods=['GET', 'POST'])
+def contact(page=1):
+    f = forms.CommentForm()
+    if f.validate_on_submit():
+        pass
+    comments = Comment.query.filter_by(of_article=0).order_by(-Comment.id)\
+        .paginate(page, per_page=50, error_out=False)
+    if pagination.items:
+        return render_template('contact.html', pagination=pagination, form=f)
+    else:
+        return render_template('not-yet.html')
+
 

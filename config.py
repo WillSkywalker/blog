@@ -8,6 +8,7 @@ class Config:
     BLOG_PASSWD = os.environ.get('BLOG_PASSWD')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'data.sqlite')
+    FREEZER_BASE_URL = '/blog'
 
 
     @staticmethod

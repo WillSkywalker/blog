@@ -79,7 +79,7 @@ def manage_article(num):
     f.formatted_title.data = article.formatted_title
     f.content.data = article.content
     f.image_url.data = article.image_url
-    f.tags.data = ', '.join(article.tags)
+    f.tags.data = ', '.join(t.tagname for t in article.tags)
 
     return render_template('new-article.html', form=f)
 

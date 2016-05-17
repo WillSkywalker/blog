@@ -6,7 +6,7 @@ class Article(db.Model):
     title = db.Column(db.Unicode(64), unique=True)
     formatted_title = db.Column(db.Unicode(64))
     subtitle = db.Column(db.Unicode(64))
-    content = db.Column(db.UnicodeText(), unique=True)
+    content = db.Column(db.UnicodeText())
     timestamp = db.Column(db.DateTime())
     image_url = db.Column(db.String())
     comments = db.relationship('Comment', backref='article')
@@ -23,6 +23,7 @@ class Comment(db.Model):
     email = db.Column(db.String(64), unique=True)
     md5 = db.Column(db.String(32), unique=True)
     content = db.Column(db.UnicodeText(), unique=True)
+    timestamp = db.Column(db.DateTime())
 
     def __repr__(self):
         return '<Comment by %r>' % self.email
