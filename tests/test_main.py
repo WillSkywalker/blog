@@ -24,5 +24,12 @@ class TestMain(unittest.TestCase):
         response = self.client.get(url_for('main.index'))
         self.assertTrue('I still love you, Ahoo' in response.get_data(as_text=True))
 
+    def test_leave_message(self):
+        esponse = self.client.post(url_for('main.contact'), data={
+            'name': 'Jorges',
+            'email': 'cxbats@126.com',
+            'comment': 'Pacha Bottasi na'
+            }, follow_redirects=True)
+
 
         

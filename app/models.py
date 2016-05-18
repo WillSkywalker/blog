@@ -24,6 +24,9 @@ class Comment(db.Model):
     md5 = db.Column(db.String(32), unique=True)
     content = db.Column(db.UnicodeText(), unique=True)
     timestamp = db.Column(db.DateTime())
+    disabled = db.Column(db.Boolean, default=False)
+    homepage = db.Column(db.String(64))
+    reply = db.Column(db.UnicodeText())
 
     def __repr__(self):
         return '<Comment by %r>' % self.email

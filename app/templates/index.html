@@ -18,25 +18,7 @@
 	<body class="index">
 		<div id="page-wrapper">
 
-			<!-- Header -->
-				<header id="header" class="alt">
-					<h1 id="logo"><a href="http://willskywalker.com">Will Skywalker's <span>Blog</span></a></h1>
-					<nav id="nav">
-						<ul>
-							<li class="current"><a href="/">Home</a></li>
-							<li class="submenu">
-								<a href="#">Navigations</a>
-								<ul>
-									<li><a href="{{ url_for('main.list_page', page=1) }}">Articles</a></li>
-									<li><a href="{{ url_for('main.tags') }}">Tags</a></li>
-									<li><a href="no-sidebar.html">Messages</a></li>
-									<li><a href="contact.html">About me</a></li>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</nav>
-				</header>
+			{% include '_header_alt.html' %}
 
 			<!-- Banner -->
 				<section id="banner">
@@ -72,15 +54,11 @@
 
 					<header class="special container">
 						<span class="icon fa-bar-chart-o"></span>
-						<h2>As this is my <strong>twentieth</strong> freebie for HTML5 UP
+						<h2><strong>Welcome</strong> to my blog.</h2>
+						<p>All the code of this site is <strong>published</strong> to <a>GitHub</a href="https://github.com/WillSkywalker/blog">. Feel free to play with them
 						<br />
-						I decided to give it a really creative name.</h2>
-						<p>Turns out <strong>Twenty</strong> was the best I could come up with. Anyway, lame name aside,
-						<br />
-						it's minimally designed, fully responsive, built on HTML5/CSS3/<strong>skel</strong>,
-						and, like all my stuff,
-						<br />
-						released for free under the <a href="http://html5up.net/license">Creative Commons Attribution 3.0</a> license. Have fun!</p>
+						as long as under the <a href="http://html5up.net/license">Apache License
+                           v2.0</a> license. Welcome!</p>
 					</header>
 
 					<!-- Three -->
@@ -126,11 +104,11 @@
 
 					<header>
 						<h2>Get in <strong>touch</strong></h2>
-						<p>Proin a ullamcorper elit, et sagittis turpis integer ut fermentum.</p>
+						<p>I'm looking forward to hearing from you.</p>
 					</header>
 					<footer>
 						<ul class="buttons">
-							<li><a href="#0" class="button special">Leave a Message</a></li>
+							<li><a href="{{ url_for('main.contact') }}" class="button special">Leave a Message</a></li>
 							<li><a href="#banner" class="button scrolly">Back to Top</a></li>
 						</ul>
 					</footer>
