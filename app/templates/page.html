@@ -4,7 +4,7 @@
 <meta property="og:url" content="{{ url_for('main.article_page', num=article.id) }}" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="{{ article.title }}" />
-<meta property="og:description" content="{{ article.content[0:90] }}" />
+<meta property="og:description" content="{{ article.content | striptags | truncate(90) }}" />
 <meta property="og:image" content="{{ article.image_url }}" />
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5720e3a86afd42ae"></script>
 <link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.3.0/styles/default.min.css">
