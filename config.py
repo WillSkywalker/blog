@@ -2,7 +2,7 @@ import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config:
-    SECRET_KEY = os.getenv('SS')
+    SECRET_KEY = os.getenv('SS') or 'kuchtopatazindagis'
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     BLOG_ADMIN = os.environ.get("BLOG_ADMIN")
     BLOG_PASSWD = os.environ.get('BLOG_PASSWD')
