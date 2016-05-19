@@ -14,8 +14,8 @@ def create_app(config_name):
     from .admin import admin as admin_bp
     app = Flask(__name__)
     app.config.from_object(config[config_name])
-    app.register_blueprint(main_bp)
-    app.register_blueprint(admin_bp, url_prefix='/admin')
+    app.register_blueprint(main_bp, url_prefix='/blog')
+    app.register_blueprint(admin_bp, url_prefix='/blog/admin')
 
 
     moment.init_app(app)
