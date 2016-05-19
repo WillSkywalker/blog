@@ -63,4 +63,4 @@ target/
 .ipynb_checkpoint
 
 # SQLite file
-.sqlite
+*.sqlite

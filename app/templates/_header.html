@@ -1,0 +1,20 @@
+<!-- Header -->
+    <header id="header">
+        <h1 id="logo"><a href="http://willskywalker.com">Will Skywalker's <span>Blog</span></a></h1>
+        <nav id="nav">
+            <ul>
+                <li class="current"><a href="/">Home</a></li>
+                <li class="submenu">
+                    <a href="#">Navigations</a>
+                    <ul>
+                        <li><a href="{{ url_for('main.list_page', page=1) }}">Articles</a></li>
+                        <li><a href="{{ url_for('main.tags') }}">Tags</a></li>
+                        <li><a href="{{ url_for('main.contact') }}">Messages</a></li>
+                        <li><a href="{{ url_for('main.search') }}">Search</a></li>
+                        <li><a href="{{ url_for('main.aboutme') }}">About me</a></li>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Search{% endblock %}
+{% block metas %}
+<script>
+  (function() {
+    var cx = '007252995826116638649:2pzl5x5uvjk';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+</style>
+{% endblock %}
+{% block header %}
+    <span class="icon fa-search"></span>
+    <h2>Search</h2>
+    <p>Sail on, sail on...</p>
+{% endblock %}
+{% block main %}
+<section class="wrapper style4 container 75%">
+<gcse:search></gcse:search>
+</section>
+{% endblock %}
