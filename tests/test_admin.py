@@ -63,7 +63,7 @@ class TestAdmin(unittest.TestCase):
             'image_url': 'https://upload.wikimedia.org/wikipedia/en/c/cb/The_Chronicles_of_Narnia_box_set_cover.jpg',
             })
         self.client.get(url_for('admin.manage_article', num=1))
-        response = self.client.post(url_for('admin.new_article'), data={
+        response = self.client.post(url_for('admin.manage_article', num=1), data={
             'title': 'Another Day To Celebrate',
             'subtitle': 'Holiday Special!',
             'tags': 'The Lion, the Witch, PCMR',

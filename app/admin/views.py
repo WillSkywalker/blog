@@ -62,16 +62,16 @@ def manage_article(num):
         if f.formatted_title.data:
             article.formatted_title = f.formatted_title.data
         for t in article.tags:
-            altag = Tag.query.filter_by(tagname=t).first()
+            altag = Tag.query.filter_by(tagname=t.tagname).first()
             altag.articles.remove(article)
         tags = f.tags.data.split(', ')
         for t in tags:
             altag = Tag.query.filter_by(tagname=t).first()
             if altag:
-                altag.articles.append(post)
+                altag.articles.append(article)
                 db.session.add(altag)
             else:
-                db.session.add(Tag(tagname=t, articles=[post]))
+                db.session.add(Tag(tagname=t, articles=[article]))
         db.session.add(article)
         return redirect(url_for('main.article_page', num=num))
     f.title.data = article.title
