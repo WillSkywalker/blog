@@ -1,0 +1,42 @@
+{% extends 'base-no-sidebar.html' %}
+{% block title %}Manage comment - Will Skywalker's Ranch{% endblock %}
+{% block header %}
+    <span class="icon fa-inbox"></span>
+    <h2>Manage comment</h2>
+    <p>Bernie says: "Think before you write."</p>
+{% endblock %}
+{% block main %}
+<section class="wrapper style3 container special">
+    <div class="8u 12u(narrower)">
+        <section style="text-align:left">
+            <header>
+                <div class="row">
+                    <div class="2u 12u(narrower)"><img class="circle" src="{{'https://secure.gravatar.com/avatar/'+comment.md5+'?s=68&d=retro&r=x'}}"/></div>
+                    <div class="8u 12u(narrower)" style="padding-top:auto">
+                        <h3 style="margin-bottom:0"><a href="{{comment.homepage}}">{{comment.name}}</a>&nbsp;&nbsp;</h3>
+                    </div>
+                    {% if manage %}
+                    <div class="2u 12u(narrower)"><a href="{{ url_for('admin.manage_comment', num=comment.id) }}" class="button">Manage</a></div>
+                    {% endif %}
+                </div>
+                
+            </header>
+            <p>{{comment.content | safe}}</p>
+        </section>
+    </div>
+</section>
+<section class="wrapper style4 container">
+<!-- Content -->
+    <div class="content">
+        <form class="column 50%" method="POST">
+            {{ form.hidden_tag() }}
+            {{ form.reply.label }}{{ form.reply() }}
+            {{ form.ban() }}{{ form.ban.label }}
+            <br>
+            {{ form.submit() }}
+        </form>
+    </div>
+</section>
+{% endblock %}
+{% block scripts %}
+{% endblock %}

@@ -104,9 +104,13 @@ def contact(page=1):
     if request.method == 'POST':
         flash_errors(f)
         return redirect(url_for('main.contact'))
+
+    manage = False
+    if 'login' in session and session['login'] == 'true':
+        manage = True
     pagination = Comment.query.filter_by(of_article=0).order_by(-Comment.id)\
         .paginate(page, per_page=50, error_out=False)
-    return render_template('contact.html', pagination=pagination, form=f)
+    return render_template('contact.html', pagination=pagination, form=f, manage=manage)
 
 
 @main.route('/search')
@@ -116,5 +120,5 @@ def search():
 
 @main.route('/me')
 def aboutme():
-    return render_template('search.html')
+    return render_template('about.html')
 

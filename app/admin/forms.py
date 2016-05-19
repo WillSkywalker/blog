@@ -1,5 +1,5 @@
 from flask.ext.wtf import Form
-from wtforms import StringField, TextAreaField, PasswordField, SubmitField
+from wtforms import StringField, TextAreaField, PasswordField, SubmitField, BooleanField
 from flask.ext.pagedown.fields import PageDownField
 from wtforms.validators import Required, URL
 
@@ -19,3 +19,8 @@ class NewPostForm(Form):
     image_url = StringField('Image URL', validators=[URL()])
     submit = SubmitField('Post')
 
+
+class ReplyForm(Form):
+    reply = TextAreaField('Reply')
+    ban = BooleanField('Ban it')
+    submit = SubmitField('Send')

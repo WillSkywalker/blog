@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}About Me{% endblock %}
+{% block metas %}
+<meta property="og:url" content="{{ url_for('main.aboutme') }}" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="徐潇 Xu Xiao" />
+<meta property="og:description" content="Welcome to my blog!" />
+<meta property="og:image" content="https://www.willskywalker.com/images/me.jpg" />
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5720e3a86afd42ae"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.3.0/styles/default.min.css">
+<script src="//cdn.jsdelivr.net/highlight.js/9.3.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style type="text/css">
+i {
+    font-style: italic !important;
+}
+</style>
+{% endblock %}
+{% block header %}
+    <span class="icon fa-user"></span>
+    <h2>About me</h2>
+    <p>'Will' comes from Will Atkins in <i>Robinson Crusoe</i>, <br>and "Skywalker" comes from...Skywalker.</p>
+{% endblock %}
+{% block sidebar %}
+<section>
+    <a href="https://www.willskywalker.com/" class="image featured"><img src="https://www.willskywalker.com/images/me.jpg"/></a>
+</section>
+<section>
+    <header><h3>徐潇 &nbsp;Xu Xiao</h3></header>
+    <p>That's my real name. Also I have a cool <a href="https://en.wikipedia.org/wiki/Courtesy_name">courtesy name</a> called 衍澈 Yanche.</p>
+
+    <header><h3>Share to</h3></header>
+    <div class="addthis_sharing_toolbox"></div>
+{% endblock %}
+{% block content %}
+    <section>
+        blahblah
+    </section>
+{% endblock %}

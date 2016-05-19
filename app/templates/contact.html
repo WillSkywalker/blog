@@ -78,6 +78,7 @@
 					</section>
 
 					{% for comment in pagination.items %}
+					{% if not comment.disabled %}
 					<section class="wrapper style3 container special">
 						<div class="8u 12u(narrower)">
 							<section style="text-align:left">
@@ -88,13 +89,38 @@
                                 			<h3 style="margin-bottom:0"><a href="{{comment.homepage}}">{{comment.name}}</a>&nbsp;&nbsp;</h3>
                                 			<time class="icon fa-clock-o" style="font-size:85%;"> &nbsp;{{moment(comment.timestamp).format('LLL')}}</time>
                                 		</div>
+                                		{% if manage %}
+                                		<div class="2u 12u(narrower)"><a href="{{ url_for('admin.manage_comment', num=comment.id) }}" class="button">Manage</a></div>
+                                		{% endif %}
                                 	</div>
                                     
                                 </header>
                                 <p>{{comment.content | safe}}</p>
+                                {% if comment.reply %}
+                                <h3 style="margin-bottom:0"><strong>Reply:</strong>&nbsp;</h3>
+                                <p>{{comment.reply | safe}}</p>
+                                {% endif %}
                             </section>
 						</div>
 					</section>
+					{% elif manage %}
+					<section class="wrapper style3 container special">
+						<div class="8u 12u(narrower)">
+							<section style="text-align:left">
+                                <header>
+                                	<div class="row">
+                                		<div class="8u 12u(narrower)" style="padding-top:auto">
+                                			<h3 style="margin-bottom:0">BANNED MESSAGE</h3>
+                                		</div>
+                                		{% if manage %}
+                                		<div class="2u 12u(narrower)"><a href="{{ url_for('admin.manage_comment', num=comment.id) }}" class="button">Manage</a></div>
+                                		{% endif %}
+                                	</div>
+                                </header>
+                            </section>
+						</div>
+					</section>
+					{% endif %}
 					{% endfor %}
 
 					<section class="wrapper style1 container special">

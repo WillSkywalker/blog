@@ -1,6 +1,6 @@
 from flask import render_template, session, redirect, url_for, current_app
 from . import admin, forms
-from ..models import Article, Tag
+from ..models import Article, Tag, Comment
 from .. import db
 from os import environ
 from datetime import datetime
@@ -83,6 +83,21 @@ def manage_article(num):
 
     return render_template('new-article.html', form=f)
 
+
+@admin.route('/comment/<int:num>', methods=['GET', 'POST'])
+def manage_comment(num):
+    if session['login'] != 'true':
+        return '<h1>Under construction</h1>'
+    comment = Comment.query.filter_by(id=num).first()
+    f = forms.ReplyForm()
+    if f.validate_on_submit():
+        comment.reply = f.reply.data
+        comment.disabled = f.ban.data
+        db.session.add(comment)
+        return redirect(url_for('main.contact'))
+    f.reply.data = comment.reply
+    f.ban.data = comment.disabled
+    return render_template('manage_comment.html', comment=comment,form=f)
 
 
 @admin.route('/login', methods=['GET', 'POST'])
