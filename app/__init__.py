@@ -17,6 +17,12 @@ def create_app(config_name):
     app.register_blueprint(main_bp, url_prefix='/blog')
     app.register_blueprint(admin_bp, url_prefix='/blog/admin')
 
+    if not app.debug:
+        import logging
+        from logging import FileHandler
+        file_handler = FileHandler('blog_errer.log')
+        file_handler.setLevel(logging.WARNING)
+        app.logger.addHandler(file_handler)
 
     moment.init_app(app)
     db.init_app(app)
