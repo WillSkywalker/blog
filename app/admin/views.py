@@ -105,6 +105,7 @@ def login_page():
     f = forms.LoginForm()
     session['login'] = None
     app = current_app._get_current_object()
+    print(app.secret_key)
     if f.validate_on_submit():
         if f.password.data == app.config['BLOG_PASSWD'] and app.config['BLOG_ADMIN'] == f.name.data:
             session['login'] = 'true'
