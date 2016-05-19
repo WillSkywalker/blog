@@ -70,8 +70,8 @@ class TestAdmin(unittest.TestCase):
             'content': '##This is a test\n\nyes it is',
             'image_url': 'https://upload.wikimedia.org/wikipedia/en/c/cb/The_Chronicles_of_Narnia_box_set_cover.jpg',
             }, follow_redirects=True)
-        self.assertNotIn('<a href="/tag/the Wardrobe">the Wardrobe</a>', response.get_data(as_text=True))
-        self.assertIn('<a href="/tag/PCMR">PCMR</a>', response.get_data(as_text=True))
+        self.assertNotIn('<a href="/blog/tag/the Wardrobe">the Wardrobe</a>', response.get_data(as_text=True))
+        self.assertIn('<a href="/blog/tag/PCMR">PCMR</a>', response.get_data(as_text=True))
 
 
 
