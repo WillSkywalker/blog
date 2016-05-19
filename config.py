@@ -2,7 +2,7 @@ import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config:
-    f = open('.secrets').readlines()
+    f = list(map(lambda x:x.rstrip(), open('.secrets').readlines()))
     SECRET_KEY = f[0] or 'kuchtopatazindagis'
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     BLOG_ADMIN = f[1] or os.environ.get("BLOG_ADMIN")
