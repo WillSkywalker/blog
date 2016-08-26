@@ -24,6 +24,12 @@ section {
     list-style-type: initial !important;
     padding: 20px !important;
 }
+a.anchor {
+    display: block;
+    position: relative;
+    top: -200px;
+    visibility: hidden;
+}
 </style>
 {% endblock %}
 {% block header %}
@@ -56,4 +62,79 @@ section {
     <section>
         {{ article.content | safe }}
     </section>
+{% endblock %}
+{% block comments %}
+<!-- One -->
+<a class="anchor" id="comment"></a>
+<section class="wrapper style4 special container 100%">
+
+    <!-- Content -->
+    <span class="main"><h2>Leave your comment</h2></span>
+    <div class="content style2">
+        {% for m in get_flashed_messages() %}
+        <div class="alert">
+            {{ m }}
+        </div>
+        {% endfor %}
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div class="row 50%">
+                <div class="6u 12u(mobile)">
+                    {{ form.name(placeholder=form.name.label.text) }}
+                </div>
+                <div class="6u 12u(mobile)">
+                    {{ form.email(placeholder=form.email.label.text) }}
+                </div>
+            </div>
+            <div class="row 50%">
+                <div class="12u">
+                    {{ form.homepage(placeholder=form.homepage.label.text) }}
+                </div>
+            </div>
+            <div class="row 50%">
+                <div class="12u">
+                    {{ form.comment(placeholder=form.comment.label.text) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="12u">
+                    <ul class="buttons">
+                        <li>{{ form.submit(class="special") }}</li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</section>
+
+{% for comment in article.comments %}
+{% if not comment.disabled %}
+<section class="wrapper style4 container special 100%">
+    <div class="8u 12u(narrower)">
+        <section style="text-align:left">
+            <header>
+                <div class="row">
+                    <div class="2u 12u(narrower)"><img class="circle" src="{{'https://secure.gravatar.com/avatar/'+comment.md5+'?s=68&d=retro&r=x'}}"/></div>
+                    <div class="8u 12u(narrower)" style="padding-top:auto">
+                        <h3 style="margin-bottom:0"><a href="{{comment.homepage}}">{{comment.name}}</a>&nbsp;&nbsp;</h3>
+                        <time class="icon fa-clock-o" style="font-size:85%;"> &nbsp;{{moment(comment.timestamp).format('LLL')}}</time>
+                    </div>
+                    {% if manage %}
+                    <div class="2u 12u(narrower)"><a href="{{ url_for('admin.manage_comment', num=comment.id) }}" class="button">Manage</a></div>
+                    {% endif %}
+                </div>
+                
+            </header>
+            <p>{{comment.content | safe}}</p>
+            {% if comment.reply %}
+            <h3 style="margin-bottom:0"><strong>Reply:</strong>&nbsp;</h3>
+            <p>{{comment.reply | safe}}</p>
+            {% endif %}
+        </section>
+    </div>
+</section>
+{% endif %}
+{% endfor %}
+
 {% endblock %}

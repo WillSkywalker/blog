@@ -1,98 +1,98 @@
 <!DOCTYPE HTML>
 <!--
-	Twenty by HTML5 UP
-	html5up.net | @n33co
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+    Twenty by HTML5 UP
+    html5up.net | @n33co
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html lang="en">
-	<head>
-		<title>Message - Will Skywalker's Ranch</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <head>
+        <title>Message - Will Skywalker's Ranch</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <!--[if lte IE 8]><script src="{{ url_for('static', filename='js/ie/html5shiv.js') }}"></script><![endif]-->
         <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
         <!--[if lte IE 8]><link rel="stylesheet" href="{{ url_for('static', filename='css/ie8.css') }}" /><![endif]-->
         <!--[if lte IE 9]><link rel="stylesheet" href="{{ url_for('static', filename='css/ie9.css') }}" /><![endif]-->
-	</head>
-	<body class="contact">
-		<div id="page-wrapper">
+    </head>
+    <body class="contact">
+        <div id="page-wrapper">
 
-			{% include '_header.html' %}
+            {% include '_header.html' %}
 
 
-			<!-- Main -->
-				<article id="main">
+            <!-- Main -->
+                <article id="main">
 
-					<header class="special container">
-						<span class="icon fa-envelope"></span>
-						<h2>Leave A Message</h2>
-						<p>Please write down all your thoughts and advices about this site. I'll reply as soon as I can.</p>
-					</header>
+                    <header class="special container">
+                        <span class="icon fa-envelope"></span>
+                        <h2>Leave A Message</h2>
+                        <p>Please write down all your thoughts and advices about this site. I'll reply as soon as I can.</p>
+                    </header>
 
-					<!-- One -->
-					<section class="wrapper style4 special container 75%">
+                    <!-- One -->
+                    <section class="wrapper style4 special container 75%">
 
-						<!-- Content -->
-							<div class="content style2">
-								{% for m in get_flashed_messages() %}
-								<div class="alert">
-									{{ m }}
-								</div>
-								{% endfor %}
-								<form method="POST">
-									{{ form.hidden_tag() }}
-									<div class="row 50%">
-										<div class="6u 12u(mobile)">
-											{{ form.name(placeholder=form.name.label.text) }}
-										</div>
-										<div class="6u 12u(mobile)">
-											{{ form.email(placeholder=form.email.label.text) }}
-										</div>
-									</div>
-									<div class="row 50%">
-										<div class="12u">
-											{{ form.homepage(placeholder=form.homepage.label.text) }}
-										</div>
-									</div>
-									<div class="row 50%">
-										<div class="12u">
-											{{ form.comment(placeholder=form.comment.label.text) }}
-										</div>
-									</div>
-									<div class="row">
-										<div class="12u">
-											<ul class="buttons">
-												<li>{{ form.submit(class="special") }}</li>
-											</ul>
-										</div>
-									</div>
-								</form>
-							</div>
+                        <!-- Content -->
+                            <div class="content style2">
+                                {% for m in get_flashed_messages() %}
+                                <div class="alert">
+                                    {{ m }}
+                                </div>
+                                {% endfor %}
+                                <form method="POST">
+                                    {{ form.hidden_tag() }}
+                                    <div class="row 50%">
+                                        <div class="6u 12u(mobile)">
+                                            {{ form.name(placeholder=form.name.label.text) }}
+                                        </div>
+                                        <div class="6u 12u(mobile)">
+                                            {{ form.email(placeholder=form.email.label.text) }}
+                                        </div>
+                                    </div>
+                                    <div class="row 50%">
+                                        <div class="12u">
+                                            {{ form.homepage(placeholder=form.homepage.label.text) }}
+                                        </div>
+                                    </div>
+                                    <div class="row 50%">
+                                        <div class="12u">
+                                            {{ form.comment(placeholder=form.comment.label.text) }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="12u">
+                                            <ul class="buttons">
+                                                <li>{{ form.submit(class="special") }}</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
 
-					</section>
+                    </section>
 
-					<section class="wrapper style1 container special">
-						<header class="content">
-							<h2><strong>Recent</strong> comments</h2>
-						</header>
-					</section>
+                    <section class="wrapper style1 container special">
+                        <header class="content">
+                            <h2><strong>Recent</strong> comments</h2>
+                        </header>
+                    </section>
 
-					{% for comment in pagination.items %}
-					{% if not comment.disabled %}
-					<section class="wrapper style3 container special">
-						<div class="8u 12u(narrower)">
-							<section style="text-align:left">
+                    {% for comment in pagination.items %}
+                    {% if not comment.disabled %}
+                    <section class="wrapper style3 container special">
+                        <div class="8u 12u(narrower)">
+                            <section style="text-align:left">
                                 <header>
-                                	<div class="row">
-                                		<div class="2u 12u(narrower)"><img class="circle" src="{{'https://secure.gravatar.com/avatar/'+comment.md5+'?s=68&d=retro&r=x'}}"/></div>
-                                		<div class="8u 12u(narrower)" style="padding-top:auto">
-                                			<h3 style="margin-bottom:0"><a href="{{comment.homepage}}">{{comment.name}}</a>&nbsp;&nbsp;</h3>
-                                			<time class="icon fa-clock-o" style="font-size:85%;"> &nbsp;{{moment(comment.timestamp).format('LLL')}}</time>
-                                		</div>
-                                		{% if manage %}
-                                		<div class="2u 12u(narrower)"><a href="{{ url_for('admin.manage_comment', num=comment.id) }}" class="button">Manage</a></div>
-                                		{% endif %}
-                                	</div>
+                                    <div class="row">
+                                        <div class="2u 12u(narrower)"><img class="circle" src="{{'https://secure.gravatar.com/avatar/'+comment.md5+'?s=68&d=retro&r=x'}}"/></div>
+                                        <div class="8u 12u(narrower)" style="padding-top:auto">
+                                            <h3 style="margin-bottom:0"><a href="{{comment.homepage}}">{{comment.name}}</a>&nbsp;&nbsp;</h3>
+                                            <time class="icon fa-clock-o" style="font-size:85%;"> &nbsp;{{moment(comment.timestamp).format('LLL')}}</time>
+                                        </div>
+                                        {% if manage %}
+                                        <div class="2u 12u(narrower)"><a href="{{ url_for('admin.manage_comment', num=comment.id) }}" class="button">Manage</a></div>
+                                        {% endif %}
+                                    </div>
                                     
                                 </header>
                                 <p>{{comment.content | safe}}</p>
@@ -101,30 +101,30 @@
                                 <p>{{comment.reply | safe}}</p>
                                 {% endif %}
                             </section>
-						</div>
-					</section>
-					{% elif manage %}
-					<section class="wrapper style3 container special">
-						<div class="8u 12u(narrower)">
-							<section style="text-align:left">
+                        </div>
+                    </section>
+                    {% elif manage %}
+                    <section class="wrapper style3 container special">
+                        <div class="8u 12u(narrower)">
+                            <section style="text-align:left">
                                 <header>
-                                	<div class="row">
-                                		<div class="8u 12u(narrower)" style="padding-top:auto">
-                                			<h3 style="margin-bottom:0">BANNED MESSAGE</h3>
-                                		</div>
-                                		{% if manage %}
-                                		<div class="2u 12u(narrower)"><a href="{{ url_for('admin.manage_comment', num=comment.id) }}" class="button">Manage</a></div>
-                                		{% endif %}
-                                	</div>
+                                    <div class="row">
+                                        <div class="8u 12u(narrower)" style="padding-top:auto">
+                                            <h3 style="margin-bottom:0">BANNED MESSAGE</h3>
+                                        </div>
+                                        {% if manage %}
+                                        <div class="2u 12u(narrower)"><a href="{{ url_for('admin.manage_comment', num=comment.id) }}" class="button">Manage</a></div>
+                                        {% endif %}
+                                    </div>
                                 </header>
                             </section>
-						</div>
-					</section>
-					{% endif %}
-					{% endfor %}
+                        </div>
+                    </section>
+                    {% endif %}
+                    {% endfor %}
 
-					<section class="wrapper style1 container special">
-						<footer class="major">
+                    <section class="wrapper style1 container special">
+                        <footer class="major">
                             <ul class="buttons">
                                 {% if pagination.has_prev %}
                                 <li><a href="{{ url_for('main.contact', num=pagination.prev_num) }}" class="button">Prev</a></li>
@@ -134,11 +134,11 @@
                                 {% endif %}
                             </ul>
                         </footer>
-					</section>
+                    </section>
 
-						
+                        
 
-				</article>
+                </article>
 
             <!-- Footer -->
                 <footer id="footer">
@@ -172,5 +172,5 @@
             <script src="{{ url_for('static', filename='js/main.js') }}"></script>
             {{ moment.include_moment() }}
 
-	</body>
+    </body>
 </html>

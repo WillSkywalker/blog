@@ -43,6 +43,7 @@ class TestAdmin(unittest.TestCase):
         response = self.client.post(url_for('admin.new_article'), data={
             'title': 'A Day To Celebrate',
             'subtitle': 'Holiday Special!',
+            'formatted_title': '<strong>A</strong> Day To Celebrate',
             'tags': 'The Lion, the Witch, the Wardrobe',
             'content': '##This is a test\n\nyes it is',
             'image_url': 'https://upload.wikimedia.org/wikipedia/en/c/cb/The_Chronicles_of_Narnia_box_set_cover.jpg',
@@ -65,14 +66,28 @@ class TestAdmin(unittest.TestCase):
         self.client.get(url_for('admin.manage_article', num=1))
         response = self.client.post(url_for('admin.manage_article', num=1), data={
             'title': 'Another Day To Celebrate',
+            'formatted_title': '<em>Another</em> Day To Celebrate',
             'subtitle': 'Holiday Special!',
             'tags': 'The Lion, the Witch, PCMR',
             'content': '##This is a test\n\nyes it is',
             'image_url': 'https://upload.wikimedia.org/wikipedia/en/c/cb/The_Chronicles_of_Narnia_box_set_cover.jpg',
             }, follow_redirects=True)
-        self.assertNotIn('<a href="/blog/tag/the Wardrobe">the Wardrobe</a>', response.get_data(as_text=True))
-        self.assertIn('<a href="/blog/tag/PCMR">PCMR</a>', response.get_data(as_text=True))
+        data = response.get_data(as_text=True)
+        self.assertNotIn('<a href="/blog/tag/the Wardrobe">the Wardrobe</a>', data)
+        self.assertIn('<a href="/blog/tag/PCMR">PCMR</a>', data)
+        self.assertIn('<h2><em>Another</em> Day To Celebrate</h2>', data)
 
+
+        self.client.post(url_for('admin.login_page'), data={
+            'name': 'test',
+            'password': 'baaaaad'
+            })
+        self.assertIn('Under construction', 
+            self.client.get(url_for('admin.manage_article', num=1)).get_data(as_text=True))
+
+
+    def test_manage_comment(self):
+        pass
 
 
         

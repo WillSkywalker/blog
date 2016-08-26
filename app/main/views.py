@@ -54,11 +54,29 @@ def index():
     return render_template('index.html', articles=articles)
 
 
-@main.route('/<int:num>')
+@main.route('/<int:num>', methods=['GET', 'POST'])
 def article_page(num):
     article = Article.query.filter_by(id=num).first()
     if article:
-        return render_template('page.html', article=article)
+        f = forms.CommentForm()
+
+        if f.validate_on_submit():
+            message = Comment(name=f.name.data,
+                              email=f.email.data,
+                              content=markdown_to_html(f.comment.data),
+                              timestamp=datetime.utcnow(),
+                              md5=md5(f.email.data.encode('utf-8')).hexdigest(),
+                              of_article=num)
+            if is_valid_url(f.homepage.data):
+                message.homepage = f.homepage.data
+            db.session.add(message)
+            return redirect(url_for('main.article_page', num=num))
+
+        if request.method == 'POST':
+            flash_errors(f)
+            return redirect(url_for('main.article_page', num=num, _anchor='comment'))
+
+        return render_template('page.html', article=article, form=f)
     else:
         return render_template('not-yet.html')
 
