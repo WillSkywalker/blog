@@ -86,7 +86,11 @@
                                     <div class="row">
                                         <div class="2u 12u(narrower)"><img class="circle" src="{{'https://secure.gravatar.com/avatar/'+comment.md5+'?s=68&d=retro&r=x'}}"/></div>
                                         <div class="8u 12u(narrower)" style="padding-top:auto">
-                                            <h3 style="margin-bottom:0"><a href="{{comment.homepage}}">{{comment.name}}</a>&nbsp;&nbsp;</h3>
+                                        {% if comment.homepage %}
+                                        <h3 style="margin-bottom:0"><a href="{{comment.homepage}}">{{comment.name}}</a>&nbsp;&nbsp;</h3>
+                                        {% else %}
+                                        <h3 style="margin-bottom:0">{{comment.name}}&nbsp;&nbsp;</h3>
+                                        {% endif %}
                                             <time class="icon fa-clock-o" style="font-size:85%;"> &nbsp;{{moment(comment.timestamp).format('LLL')}}</time>
                                         </div>
                                         {% if manage %}
