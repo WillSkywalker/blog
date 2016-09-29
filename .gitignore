@@ -6,6 +6,7 @@ __pycache__/
 # C extensions
 *.so
 
+.DS_Store
 .secrets
 venv/
 
@@ -67,3 +68,7 @@ target/
 
 # SQLite file
 *.sqlite
+
+# CTags file
+*.tags
+*.tags_sorted_by_file
