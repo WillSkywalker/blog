@@ -24,7 +24,7 @@ class Comment(db.Model):
     md5 = db.Column(db.String(32))
     content = db.Column(db.UnicodeText())
     timestamp = db.Column(db.DateTime())
-    # disabled = db.Column(db.Boolean, default=False)
+    disabled = db.Column(db.Boolean, default=False)
     homepage = db.Column(db.String(128))
     reply = db.Column(db.UnicodeText())
 
